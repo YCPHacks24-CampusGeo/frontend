@@ -1,11 +1,15 @@
-.UwU_Papa {
+.title {
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     color: darkblue;
     text-align: center;
 }
 
-.Braden_Sux_If_He_Reads_This {
-    font-size: 10px;
-    color: lightgray;
-    text-align: center;
+#panorama {
+    width: 40%;
+    height: 500px;
+}
+
+#map {
+    width: 40%;
+    height: 500px;
 }
