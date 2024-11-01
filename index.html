@@ -1,64 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" href="/styles/main.css">
-    <link rel="icon" type="image/x-icon" href="/images/YCPGeoLogo-transparent.png">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.css">
-    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
-    <script src="/scripts/main.js"></script>
-    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.js"></script>
-    <title>Home</title>
-</head>
-<body>
-<div class="title">Photo Upload Utility</div>
-<div class="file-uploader">
-    <div class="parent">
-        <form action="#">
-            <input type="file" id="choose-file-button" name="filename" onchange="readURL(this)">
-        </form>
-    </div>
-</div>
-<div id="panorama"></div>
-<div id="map"></div>
-<button id="submit">Submit</button>
-<script>
-    // Initialize the map
-    var map = L.map('map').setView([39.946952, -76.727429], 18);
-
-
-    // Add OpenStreetMap tiles
-    L.tileLayer('https://map.ycp.campusgeo.com/{z}/{x}/{y}.png', {
-        attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-        maxZoom: 20,
-        minZoom: 14
-    }).addTo(map);
-
-    var clickedLatLng;
-    var currentMarker = null;
-
-    // Add click event to the map
-    map.on('click', function(e) {
-        if (currentMarker) {
-            map.removeLayer(currentMarker);
-        }
-
-        const lat = e.latlng.lat;
-        const lng = e.latlng.lng;
-        currentMarker = L.marker([lat, lng]).addTo(map)
-        clickedLatLng = e.latlng;
-        console.log("Clicked coordinates: " + clickedLatLng.lat + ", " + clickedLatLng.lng);
-    });
-
-    // Add click event to the submit button
-    document.getElementById('submit').addEventListener('click', function() {
-        if (clickedLatLng) {
-            console.log("Submitted coordinates: " + clickedLatLng.lat + ", " + clickedLatLng.lng);
-        } else {
-            console.log("No coordinates clicked yet.");
-        }
-    });
-</script>
-</body>
+    <head>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="/styles/main.css">
+        <link rel="icon" type="image/x-icon" href="/images/YCPGeoLogo-transparent.png">
+        <script src="/scripts/main.js"></script>
+        <title>Home</title>
+    </head>
+    <body>
+        <div>Hello World</div>
+    </body>
 </html>
