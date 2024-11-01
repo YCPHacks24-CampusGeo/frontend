@@ -36,7 +36,11 @@ async function loadMap(input) {
                 base64JPG: base64Img
             }
 
-            await ApiRequest('locationupload', 'uploadlocation', 'POST', uploadObject);
+            var status = await ApiRequest('locationupload', 'uploadlocation', 'POST', uploadObject);
+
+            if(status === 200) {
+                location.reload();
+            }
 
         } else {
             console.log("No coordinates clicked yet.");
@@ -75,29 +79,3 @@ async function getBase64(file) {
         reader.readAsDataURL(file);
     });
 }
-
-document.getElementById('uploadForm').addEventListener('submit', async function(event) {
-    event.preventDefault();
-
-    const formData = new FormData();
-    const photo = document.getElementById('photo').files[0];
-    const text = document.getElementById('text').value;
-
-    formData.append('photo', photo);
-    formData.append('text', text);
-
-    try {
-        const response = await fetch('YOUR_API_ENDPOINT', {
-            method: 'POST',
-            body: formData,
-        });
-        if (response.ok) {
-            alert('Upload successful!');
-        } else {
-            alert('Upload failed.');
-        }
-    } catch (error) {
-        console.error('Error:', error);
-        alert('An error occurred.');
-    }
-});

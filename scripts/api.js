@@ -17,11 +17,18 @@ async function ApiRequest(controller, action, method, body = null) {
 
         if (response.ok) {
             console.log(method + ' successful!');
+            alert(method + ' successful!');
+            return response.status;
         } else {
             console.log(method + ' failed.');
+            alert(method + ' failed!');
+            return response.status;
         }
     } catch (error) {
         console.error('Error:', error);
         console.log('An error occurred.');
+        alert(method + ' error!');
     }
+
+    return -1;
 }
