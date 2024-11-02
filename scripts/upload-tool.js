@@ -41,8 +41,11 @@ async function loadMap(input) {
 
             document.getElementById('submit').disabled = false;
 
-            if(status === 200) {
+            if(status.status === 200) {
+                alert("POST success");
                 location.reload();
+            } else {
+                alert("POST failed/error");
             }
 
         } else {

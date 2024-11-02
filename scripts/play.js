@@ -6,6 +6,15 @@ let onCooldown = false;
 let viewer;
 let latLng = null;
 let currentMarker = null;
+let playerName = null;
+let playerIcon = null;
+let playerScore = "0000";
+
+async function init() {
+    await loadMap('map');
+    await loadLocation('panorama');
+    await loadToolbar();
+}
 
 async function loadMap(divName) {
     map = L.map(divName).setView([39.946952, -76.727429], 18);
@@ -19,9 +28,9 @@ async function loadMap(divName) {
 
     let clickedLatLng;
 
-    map.on('click', function (e) {
+    map.on('click', async function (e) {
         if (!mapEnlarged) {
-            swapLocationMap();
+            await swapLocationMap();
         } else {
             if (currentMarker) {
                 map.removeLayer(currentMarker);
@@ -37,33 +46,43 @@ async function loadMap(divName) {
     });
 }
 
-function loadLocation(image, divName){
-    curImg = image;
+async function loadLocation(divName){
+    if(curImg == null) {
+        curImg = `/locations/${await getImage()}.jpg`;
+    }
+
     viewer = pannellum.viewer(divName, {
         "type": "equirectangular",
-        "panorama": image,
+        "panorama": curImg,
         "autoLoad": true,
         "compass": false,
         "showControls": false
     });
 }
 
-function swapLocationMap() {
+async function loadToolbar() {
+    await getPlayerData();
+    document.getElementById("icon").src = playerIcon;
+    document.getElementById("name").innerHTML = playerName;
+    document.getElementById("score").innerHTML = playerScore;
+}
+
+async function swapLocationMap() {
     onCooldown = true;
     setTimeout(() => {
         onCooldown = false;
     }, 2000);
     map.remove();
     viewer.destroy();
-    if(swapped) {
-        loadMap('map');
-        loadLocation(curImg, 'panorama');
+    if (swapped) {
+        await loadMap('map');
+        await loadLocation('panorama');
     } else {
-        loadLocation(curImg, 'map');
-        loadMap('panorama');
+        await loadLocation('map');
+        await loadMap('panorama');
     }
     currentMarker = null;
-    if(latLng != null) {
+    if (latLng != null) {
         currentMarker = L.marker(latLng).addTo(map);
     }
     mapEnlarged = !mapEnlarged;
@@ -75,13 +94,28 @@ function changeMapSize() {
     if(window.innerWidth < 1000) {
         map.style.width = "40vw";
         map.style.height = "40vw";
-        map.style.border = "0.3vh solid black";
+        map.style.border = "0.3vh solid green";
     } else {
         map.style.width = "20vw";
         map.style.height = "20vw";
-        map.style.border = "0.4vh solid black";
+        map.style.border = "0.4vh solid green";
     }
     map.style.borderRadius = "5px";
 }
 
+async function getImage() {
+    let response = await ApiRequest("test", "getlocation", "GET");
+    let body = await response.json();
+    return body.imageKey;
+}
+
+async function getPlayerData() {
+    let response = await ApiRequest("test", "geticon", "GET");
+    let body = await response.json();
+    playerName = body.name;
+    //playerIcon = `/icons/${body.icon}.jpg`;
+    playerIcon = `/markers/${body.icon}.jpg`;
+}
+
 window.addEventListener('resize', changeMapSize);
+document.addEventListener('DOMContentLoaded', init);

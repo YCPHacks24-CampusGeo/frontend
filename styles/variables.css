@@ -1,0 +1,7 @@
+:root {
+    --nav-background: rgb(20, 40, 60);
+    --home-button-background: rgb(0, 150, 150);
+    --home-button-background-hover: rgb(4, 194, 194);
+    --guess-button-background: #037a19;
+    --guess-button-background-hover: #019b20;
+}

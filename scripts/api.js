@@ -1,6 +1,7 @@
 const apiURL = 'https://api.ycp.campusgeo.com'
 
 async function ApiRequest(controller, action, method, body = null) {
+    let response = null;
     try {
         var request = {
             method: method,
@@ -13,22 +14,17 @@ async function ApiRequest(controller, action, method, body = null) {
             };
         }
 
-        const response = await fetch(apiURL + '/' + controller + '/' + action, request);
+        response = await fetch(apiURL + '/' + controller + '/' + action, request);
 
         if (response.ok) {
             console.log(method + ' successful!');
-            alert(method + ' successful!');
-            return response.status;
         } else {
             console.log(method + ' failed.');
-            alert(method + ' failed!');
-            return response.status;
         }
     } catch (error) {
         console.error('Error:', error);
         console.log('An error occurred.');
-        alert(error);
     }
 
-    return -1;
+    return response;
 }

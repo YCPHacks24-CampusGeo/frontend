@@ -4,12 +4,12 @@ html, body {
 }
 
 #container {
-    position: relative;
-    height: 100%;
+    display: flex;
+    flex-flow: column;
+    height: 90%;
 }
 
 #panorama {
-    position: absolute;
     width: 100vw;
     height: 100vh;
     max-width: 100%;
@@ -24,9 +24,47 @@ html, body {
     position: absolute;
     width: 80vh;
     height: 80vh;
-    border: 0.4vh solid black;
+    border: 0.4vh solid green;
     border-radius: 5px;
     z-index: 10;
+}
+
+#guess-button {
+    position: absolute;
+    margin-top: 84vh;
+    margin-left: 10vw;
+    transition: all .15s ease-out;
+}
+
+#guess-button:hover {
+    transform: translateY(0.5vh);
+}
+
+#guess {
+    width: 60vw;
+    height: 5vh;
+    color: white;
+    background-color: var(--guess-button-background);
+    border: 0;
+    border-radius: 50vw;
+    font-size: 4vh;
+    font-weight: bold;
+    font-family: 'Montserrat', sans-serif;
+    box-shadow: 0.5vh 0.5vh 0.25vh 0 rgba(0, 0, 0, 0.65);
+}
+
+#guess:hover {
+    cursor: pointer;
+    background-color: var(--guess-button-background-hover);
+    box-shadow: 0.3vh 0.3vh 0.15vh 0 rgba(0, 0, 0, 0.65);
+}
+
+.custom-icon {
+    position: absolute;
+    top: -30px;
+    left: -10px;
+    width: 30px;
+    height: auto;
 }
 
 @media (max-width: 1000px) {
@@ -36,9 +74,13 @@ html, body {
         position: absolute;
         width: 100vw;
         height: 100vw;
-        border: 0.3vh solid black;
+        border: 0.3vh solid green;
         border-radius: 5px;
         z-index: 10;
+    }
+
+    #guess {
+        width: 40vw;
     }
 
 }

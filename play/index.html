@@ -4,17 +4,44 @@
         <meta charset="UTF-8">
         <link rel="icon" type="image/x-icon" href="/images/YCPGeoLogo-transparent.png">
         <link rel="stylesheet" href="/styles/play.css">
+        <link rel="stylesheet" href="/styles/main.css">
+        <link rel="stylesheet" href="/styles/variables.css">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.css">
         <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
         <script src="/scripts/play.js"></script>
+        <script src="/scripts/api.js"></script>
         <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.js"></script>
         <title>Play</title>
     </head>
-    <body onload="loadMap('map'); loadLocation('/locations/00xldxp3.51k.jpg', 'panorama');">
+    <body>
+        <div id="nav-bar">
+            <div id="logo">
+                <img id="logo-img" src="/images/YCPGeoLogo-transparent.png">
+            </div>
+            <div id="player-data">
+                <div id="player-icon">
+                    <img id="icon" alt="">
+                </div>
+                <div id="player-info">
+                    <div id="player-name">
+                        <span id="name"></span>
+                    </div>
+                    <div id="player-score">
+                        <span id="score"></span>
+                    </div>
+                </div>
+            </div>
+            <div id="home-button">
+                <a id="home" href="/">Home</a>
+            </div>
+        </div>
         <div id="container">
             <div id="panorama"></div>
             <div id="map" onclick="if(!onCooldown) swapLocationMap();"></div>
+            <div id="guess-button">
+                <button id="guess" class="button" type="submit">Guess</button>
+            </div>
         </div>
     </body>
 </html>

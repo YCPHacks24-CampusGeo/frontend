@@ -1,0 +1,87 @@
+html, body {
+    margin: 0;
+    height: 100%;
+}
+
+#nav-bar {
+    position: relative;
+    height: 10%;
+    background-color: var(--nav-background);
+    box-shadow: 0 7px 5px 0 rgba(0,0,0,0.75);
+    z-index: 11;
+}
+
+#logo {
+    z-index: 12;
+    height: 100%;
+}
+
+#logo-img {
+    height: 100%;
+}
+
+#home-button {
+    position: absolute;
+    display: flex;
+    justify-content: flex-end;
+    top: 1.5vh;
+    right: 0;
+    margin-right: 1vw;
+    transition: all .15s ease-out;
+}
+
+#home-button:hover {
+    transform: translateY(0.5vh);
+}
+
+#home {
+    display: inline-block;
+    text-decoration: none;
+    color: white;
+    font-size: 3vh;
+    font-weight: bold;
+    font-family: 'Montserrat', sans-serif;
+    background-color: var(--home-button-background);
+    padding: 20% 80%;
+    border-radius: 10vh;
+    box-shadow: 0.5vh 0.5vh 0.25vh 0 rgba(0, 0, 0, 0.65);
+}
+
+#home:hover {
+    background-color: var(--home-button-background-hover);
+    box-shadow: 0.3vh 0.3vh 0.15vh 0 rgba(0, 0, 0, 0.65);
+}
+
+#player-data {
+    display: flex;
+    justify-content: center;
+    top: 0;
+}
+
+#player-icon {
+    margin-top: -9.6vh;
+}
+
+#player-name {
+    margin-top: -9vh;
+    margin-left: 1vw;
+    font-size: 4vh;
+    font-weight: bold;
+    color: white;
+    font-family: 'Montserrat', sans-serif;
+}
+
+#icon {
+    border-radius: 50%;
+    max-height: 8.5vh;
+    border: 0.4vh solid white;
+}
+
+#player-score {
+    text-align: center;
+    margin-top: -0.5vh;
+    font-size: 4vh;
+    font-weight: bold;
+    color: #6ad26a;
+    font-family: 'Montserrat', sans-serif;
+}
