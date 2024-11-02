@@ -1,0 +1,103 @@
+#container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    height: calc(100% - 10%);
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+@media (max-width: 1000px) {
+    #container {
+        height: calc(100% - 5%);
+    }
+}
+
+.slider-container {
+    display: flex;
+    align-items: center;
+    margin: 10px 0;
+    width: 100%;
+    max-width: 600px;
+}
+
+.slider-number {
+    font-size: 2rem;
+}
+
+.slider-container label {
+    margin-right: 10px;
+    flex: 1;
+    font-size: 2rem;
+    text-align: right;
+}
+
+.slider-container input[type="range"] {
+    margin: 0 10px;
+    -webkit-appearance: none;
+    width: 100%;
+    height: 15px;
+    background: linear-gradient(to right, var(--button-primary), var(--button-secondary), var(--button-tertiary));
+    outline: none;
+    opacity: 0.7;
+    transition: opacity .2s;
+    flex: 3;
+}
+
+.slider-container input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 25px;
+    height: 25px;
+    background: var(--nav-background);
+    cursor: pointer;
+    border-radius: 50%;
+}
+
+.slider-container input[type="range"]::-moz-range-thumb {
+    width: 25px;
+    height: 25px;
+    background: var(--nav-background);
+    cursor: pointer;
+    border-radius: 50%;
+}
+
+.slider-container span {
+    margin-left: 10px;
+    width: 60px;
+    display: inline-block;
+    text-align: right;
+}
+
+.button-container {
+    margin-top: 20px;
+    width: 100%;
+    max-width: 600px;
+    display: flex;
+    justify-content: center;
+}
+
+button {
+    padding: 10px 20px;
+    margin: 10px;
+    color: white;
+    border: none;
+    border-radius: 26px;
+    cursor: pointer;
+    width: 100%;
+    max-width: 520px;
+    height: 4em;
+    transition: all .15s ease-out;
+    font-family: Orbitron, monospace;
+    letter-spacing: 6px;
+    font-size: 3.5em;
+    box-shadow: 0.5vh 0.5vh 0.25vh 0 rgba(0, 0, 0, 0.65);
+    background-color: var(--button-primary);
+}
+
+button:hover {
+    transform: translateY(0.5vh);
+    filter: brightness(0.9);
+    box-shadow: 0.3vh 0.3vh 0.15vh 0 rgba(0, 0, 0, 0.65);
+}

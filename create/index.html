@@ -3,9 +3,49 @@
 <head>
     <meta charset="UTF-8">
     <link rel="icon" type="image/x-icon" href="/images/YCPGeoLogo-transparent.png">
+    <link rel="stylesheet" href="/styles/main.css">
+    <link rel="stylesheet" href="/styles/variables.css">
+    <link rel="stylesheet" href="/styles/create.css">
+    <link rel="icon" type="image/x-icon" href="/images/YCPGeoLogo-transparent.png">
+    <script src="/scripts/main.js"></script>
+    <script src="/scripts/api.js"></script>
+    <script src="/scripts/create.js"></script>
     <title>Create Game</title>
 </head>
 <body>
+<div id="nav-bar">
+    <div id="logo">
+        <img id="logo-img" src="/images/YCPGeoLogo-transparent.png">
+    </div>
 
+    <div id="home-button">
+        <a id="home" href="/">Home</a>
+    </div>
+</div>
+<div id="container">
+    <div class="slider-container">
+        <label for="roundCountSlider">Round Count:</label>
+        <input type="range" id="roundCountSlider" min="1" max="20" step="1" value="5" oninput="updateValue('roundCountValue', this.value)">
+        <span id="roundCountValue" class="slider-number">5</span>
+    </div>
+    <div class="slider-container">
+        <label for="maxPlayersSlider">Max Players:</label>
+        <input type="range" id="maxPlayersSlider" min="1" max="150" step="1" value="100" oninput="updateValue('maxPlayersValue', this.value)">
+        <span id="maxPlayersValue" class="slider-number">100</span>
+    </div>
+    <div class="slider-container">
+        <label for="guessTimeSlider">Guess Time (ms):</label>
+        <input type="range" id="guessTimeSlider" min="10000" max="60000" step="100" value="20000" oninput="updateValue('guessTimeValue', this.value)">
+        <span id="guessTimeValue" class="slider-number">20000</span>
+    </div>
+    <div class="slider-container">
+        <label for="intermissionTimeSlider">Intermission Time (ms):</label>
+        <input type="range" id="intermissionTimeSlider" min="5000" max="30000" step="100" value="10000" oninput="updateValue('intermissionTimeValue', this.value)">
+        <span id="intermissionTimeValue" class="slider-number">10000</span>
+    </div>
+    <div class="button-container">
+        <button onclick="submitValues()">Submit</button>
+    </div>
+</div>
 </body>
 </html>
