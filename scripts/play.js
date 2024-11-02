@@ -77,6 +77,8 @@ function changeMapSize() {
         map.style.width = "20vw";
         map.style.height = "20vw";
     }
+    map.style.border = "0.4vh solid black";
+    map.style.borderRadius = "5px";
     mapEnlarged = false;
 }
 
