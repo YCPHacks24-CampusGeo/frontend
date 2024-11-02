@@ -45,7 +45,8 @@ function loadLocation(image, divName){
         "type": "equirectangular",
         "panorama": image,
         "autoLoad": true,
-        "compass": false
+        "compass": false,
+        "showControls": false
     });
 }
 
