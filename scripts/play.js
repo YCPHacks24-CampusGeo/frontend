@@ -68,9 +68,16 @@ function swapLocationMap() {
     swapped = !swapped
 }
 
-function shrinkMap() {
+function changeMapSize() {
     const map = document.getElementById("map");
-    map.style.width = "30vw";
-    map.style.height = "30vw";
+    if(window.innerWidth < 600) {
+        map.style.width = "50vw";
+        map.style.height = "50vw";
+    } else {
+        map.style.width = "20vw";
+        map.style.height = "20vw";
+    }
     mapEnlarged = false;
 }
+
+window.addEventListener('resize', changeMapSize);
