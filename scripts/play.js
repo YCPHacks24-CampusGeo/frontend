@@ -76,12 +76,10 @@ function changeMapSize() {
         map.style.width = "40vw";
         map.style.height = "40vw";
         map.style.border = "0.3vh solid black";
-        map.style.boxSizing = "border-box";
     } else {
         map.style.width = "20vw";
         map.style.height = "20vw";
         map.style.border = "0.4vh solid black";
-        map.style.boxSizing = "border-box";
     }
     map.style.borderRadius = "5px";
 }
