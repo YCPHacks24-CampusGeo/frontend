@@ -70,7 +70,7 @@ function swapLocationMap() {
 
 function shrinkMap() {
     const map = document.getElementById("map");
-    map.style.width = "20vw";
-    map.style.height = "20vw";
+    map.style.width = "30vw";
+    map.style.height = "30vw";
     mapEnlarged = false;
 }
