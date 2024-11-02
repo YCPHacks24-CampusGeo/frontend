@@ -10,6 +10,7 @@ let playerName = null;
 let playerIcon = null;
 let playerMarker = null;
 let playerScore = "0000";
+let marker = null;
 
 async function init() {
     await loadMap('map');
@@ -25,7 +26,7 @@ async function loadMap(divName) {
         minZoom: 14
     }).addTo(map);
 
-    let icon = L.icon({
+    marker = L.icon({
         iconUrl: playerMarker,
         iconAnchor: [17, 47],
         iconSize: [33, 47]
@@ -46,7 +47,16 @@ async function loadMap(divName) {
             const lat = e.latlng.lat;
             const lng = e.latlng.lng;
             latLng = [lat, lng];
-            currentMarker = L.marker([lat, lng], {icon: icon}).addTo(map)
+            currentMarker = L.marker([lat, lng], {icon: marker}).addTo(map);
+            const element = document.getElementById("guess");
+            if(!element) {
+                const button = document.createElement("button");
+                button.id = "guess";
+                button.classList.add("button");
+                button.type = "submit";
+                button.innerHTML = "Guess";
+                document.getElementById("guess-button").appendChild(button);
+            }
             clickedLatLng = e.latlng;
             console.log("Clicked coordinates: " + clickedLatLng.lat + ", " + clickedLatLng.lng);
         }
@@ -81,16 +91,32 @@ async function swapLocationMap() {
     }, 2000);
     map.remove();
     viewer.destroy();
+    const element = document.getElementById("guess");
     if (swapped) {
+        if(element) {
+            element.style.visibility = "hidden";
+            element.style.disabled = true;
+        }
         await loadMap('map');
         await loadLocation('panorama');
     } else {
         await loadLocation('map');
         await loadMap('panorama');
+        if(currentMarker && !element) {
+            const button = document.createElement("button");
+            button.id = "guess";
+            button.classList.add("button");
+            button.type = "submit";
+            button.innerHTML = "Guess";
+            document.getElementById("guess-button").appendChild(button);
+        } else if(element) {
+            element.style.visibility = "visible";
+            element.style.disabled = false;
+        }
     }
     currentMarker = null;
     if (latLng != null) {
-        currentMarker = L.marker(latLng).addTo(map);
+        currentMarker = L.marker(latLng, {icon: marker}).addTo(map);
     }
     mapEnlarged = !mapEnlarged;
     swapped = !swapped
