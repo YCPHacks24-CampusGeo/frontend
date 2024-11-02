@@ -75,6 +75,7 @@ html, body {
     border-radius: 50%;
     max-height: 8.5vh;
     border: 0.4vh solid white;
+    box-shadow: 0.4vh 0.4vh 0.25vh 0 rgba(0, 0, 0, 0.65);
 }
 
 #player-score {
@@ -92,20 +93,21 @@ html, body {
     }
 
     #player-icon {
-        margin-top: -5vh;
+        margin-top: -4.25vh;
     }
 
     #icon {
-        max-height: 4.25vh;
+        max-height: 3vh;
     }
 
     #player-name {
-        font-size: 2vh;
-        margin-top: -4.5vh;
+        font-size: 1vh;
+        margin-top: -3.5vh;
     }
 
     #player-score {
-        font-size: 2vh;
+        font-size: 1vh;
+        margin-top: 0;
     }
 
     #home-button {

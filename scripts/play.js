@@ -8,6 +8,7 @@ let latLng = null;
 let currentMarker = null;
 let playerName = null;
 let playerIcon = null;
+let playerMarker = null;
 let playerScore = "0000";
 
 async function init() {
@@ -24,6 +25,12 @@ async function loadMap(divName) {
         minZoom: 14
     }).addTo(map);
 
+    let icon = L.icon({
+        iconUrl: playerMarker,
+        iconAnchor: [17, 47],
+        iconSize: [33, 47]
+    });
+
     changeMapSize();
 
     let clickedLatLng;
@@ -39,7 +46,7 @@ async function loadMap(divName) {
             const lat = e.latlng.lat;
             const lng = e.latlng.lng;
             latLng = [lat, lng];
-            currentMarker = L.marker([lat, lng]).addTo(map)
+            currentMarker = L.marker([lat, lng], {icon: icon}).addTo(map)
             clickedLatLng = e.latlng;
             console.log("Clicked coordinates: " + clickedLatLng.lat + ", " + clickedLatLng.lng);
         }
@@ -113,8 +120,9 @@ async function getPlayerData() {
     let response = await ApiRequest("test", "geticon", "GET");
     let body = await response.json();
     playerName = body.name;
-    //playerIcon = `/icons/${body.icon}.jpg`;
-    playerIcon = `/markers/${body.icon}.jpg`;
+    playerIcon = `/icons/${body.icon}.jpg`;
+    playerMarker = `/markers/${body.icon}.png`
+
 }
 
 window.addEventListener('resize', changeMapSize);
