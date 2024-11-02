@@ -32,9 +32,9 @@ html, body {
 
 #guess-button {
     position: absolute;
-    margin-top: 84vh;
     margin-left: 10vw;
     transition: all .15s ease-out;
+    bottom: 3vh;
 }
 
 #guess-button:hover {
