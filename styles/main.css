@@ -85,3 +85,35 @@ html, body {
     color: #6ad26a;
     font-family: 'Montserrat', sans-serif;
 }
+
+@media (max-width: 1000px) {
+    #nav-bar {
+        height: 5%;
+    }
+
+    #player-icon {
+        margin-top: -5vh;
+    }
+
+    #icon {
+        max-height: 4.25vh;
+    }
+
+    #player-name {
+        font-size: 2vh;
+        margin-top: -4.5vh;
+    }
+
+    #player-score {
+        font-size: 2vh;
+    }
+
+    #home-button {
+        top: 1vh;
+    }
+
+    #home {
+        font-size: 1.5vh;
+        padding: 10% 40%;
+    }
+}
