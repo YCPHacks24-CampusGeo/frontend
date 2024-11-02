@@ -20,10 +20,6 @@ async function loadMap(divName) {
     map.on('click', function (e) {
         if (!mapEnlarged) {
             swapLocationMap();
-            currentMarker = null;
-            if(latLng != null) {
-                currentMarker = L.marker(latLng).addTo(map);
-            }
         } else {
             if (currentMarker) {
                 map.removeLayer(currentMarker);
@@ -62,6 +58,10 @@ function swapLocationMap() {
     } else {
         loadLocation(curImg, 'map');
         loadMap('panorama');
+    }
+    currentMarker = null;
+    if(latLng != null) {
+        currentMarker = L.marker(latLng).addTo(map);
     }
     mapEnlarged = !mapEnlarged;
     swapped = !swapped
