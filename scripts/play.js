@@ -15,6 +15,8 @@ async function loadMap(divName) {
         minZoom: 14
     }).addTo(map);
 
+    changeMapSize();
+
     let clickedLatLng;
 
     map.on('click', function (e) {
@@ -73,13 +75,13 @@ function changeMapSize() {
     if(window.innerWidth < 1000) {
         map.style.width = "40vw";
         map.style.height = "40vw";
+        map.style.border = "0.3vh solid black";
     } else {
         map.style.width = "20vw";
         map.style.height = "20vw";
+        map.style.border = "0.4vh solid black";
     }
-    map.style.border = "0.4vh solid black";
     map.style.borderRadius = "5px";
-    mapEnlarged = false;
 }
 
 window.addEventListener('resize', changeMapSize);
