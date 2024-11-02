@@ -4,6 +4,8 @@ let curImg;
 let map;
 let onCooldown = false;
 let viewer;
+let latLng = null;
+let currentMarker = null;
 
 async function loadMap(divName) {
     map = L.map(divName).setView([39.946952, -76.727429], 18);
@@ -14,11 +16,14 @@ async function loadMap(divName) {
     }).addTo(map);
 
     let clickedLatLng;
-    let currentMarker = null;
 
     map.on('click', function (e) {
         if (!mapEnlarged) {
             swapLocationMap();
+            currentMarker = null;
+            if(latLng != null) {
+                currentMarker = L.marker(latLng).addTo(map);
+            }
         } else {
             if (currentMarker) {
                 map.removeLayer(currentMarker);
@@ -26,6 +31,7 @@ async function loadMap(divName) {
 
             const lat = e.latlng.lat;
             const lng = e.latlng.lng;
+            latLng = [lat, lng];
             currentMarker = L.marker([lat, lng]).addTo(map)
             clickedLatLng = e.latlng;
             console.log("Clicked coordinates: " + clickedLatLng.lat + ", " + clickedLatLng.lng);
@@ -38,7 +44,8 @@ function loadLocation(image, divName){
     viewer = pannellum.viewer(divName, {
         "type": "equirectangular",
         "panorama": image,
-        "autoLoad": true
+        "autoLoad": true,
+        "compass": false
     });
 }
 
@@ -58,9 +65,6 @@ function swapLocationMap() {
     }
     mapEnlarged = !mapEnlarged;
     swapped = !swapped
-    //var map = document.getElementById("map");
-    //map.style.width = "80vh";
-    //map.style.height = "80vh";
 }
 
 function shrinkMap() {
