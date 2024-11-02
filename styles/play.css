@@ -12,6 +12,7 @@ html, body {
     position: absolute;
     width: 100vw;
     height: 100vh;
+    z-index: 0;
 }
 
 #map {
@@ -21,4 +22,26 @@ html, body {
     width: 80vh;
     height: 80vh;
     border: 0.4vh solid black;
+    z-index: 1;
+}
+
+@media (max-width: 600px) {
+    #panorama {
+        bottom: 0;
+        position: absolute;
+        width: 100vw;
+        height: 100vw;
+        z-index: 0;
+    }
+
+    #map {
+        bottom: 1%;
+        right: 1%;
+        position: absolute;
+        width: 100vw;
+        height: 100vw;
+        border: 0.4vh solid black;
+        z-index: 1;
+    }
+
 }
