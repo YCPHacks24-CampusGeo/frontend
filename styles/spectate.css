@@ -1,0 +1,142 @@
+html, body {
+    height: 100vh;
+    width: 100vw;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+#title {
+    position: absolute;
+    color: white;
+    font-size: 5vw;
+    font-family: Orbitron, monospace;
+    margin-top: -11vh;
+    width: 100%;
+    text-align: center;
+}
+
+#guesses {
+    position: absolute;
+    color: white;
+    font-size: 5vw;
+    font-family: Orbitron, monospace;
+    margin-top: -11vh;
+    width: 100%;
+    text-align: center;
+}
+
+#spectator-windows {
+    height: 90vh;
+    width: 100vw;
+    position: absolute;
+}
+
+#leaderboard {
+    height: 87.5vh;
+    width: 100vw;
+    margin-top: 2vh;
+}
+
+#map {
+    height: 90vh;
+    width: 100vw;
+    position: absolute;
+}
+
+.leaderboard-icon {
+    border-radius: 50%;
+    margin-top: 2.5vh;
+    margin-left: 1.5vw;
+    border: 0.4vh solid white;
+}
+
+.leaderboard-name, .leaderboard-score {
+    color: white;
+    position: absolute;
+    font-family: Orbitron, monospace;
+}
+
+.leaderboard-name {
+    margin-top: 3vh;
+    margin-left: 2vw;
+}
+
+.leaderboard-score {
+    margin-left: 2vw;
+}
+
+#first {
+    width: 90vw;
+    height: 30vh;
+    float: right;
+    border-radius: 5vh;
+    margin-right: -2vw;
+    box-shadow: 0.5vh 0.5vh 0.25vh 0 rgba(0, 0, 0, 0.65);
+    background-color: var(--button-primary);
+}
+
+#firstImg {
+    height: 25vh;
+}
+
+#firstName {
+    font-size: 5vw;
+}
+
+#firstScore {
+    font-size: 5vw;
+    margin-top: 15vh;
+}
+
+#second {
+    width: 80vw;
+    height: 25vh;
+    float: right;
+    border-radius: 5vh;
+    margin-top: 2vh;
+    margin-right: -2vw;
+    box-shadow: 0.5vh 0.5vh 0.25vh 0 rgba(0, 0, 0, 0.65);
+    background-color: var(--button-secondary);
+}
+
+#secondImg {
+    height: 20vh;
+}
+
+#secondName {
+    font-size: 4vw;
+}
+
+#secondScore {
+    font-size: 4vw;
+    margin-top: 13vh;
+}
+
+#third {
+    width: 70vw;
+    height: 20vh;
+    float: right;
+    border-radius: 5vh;
+    margin-top: 2vh;
+    margin-right: -2vw;
+    box-shadow: 0.5vh 0.5vh 0.25vh 0 rgba(0, 0, 0, 0.65);
+    background-color: var(--button-tertiary);
+}
+
+#thirdImg {
+    height: 15vh;
+}
+
+#thirdName {
+    font-size: 3vw;
+}
+
+#thirdScore {
+    font-size: 3vw;
+    margin-top: 11vh;
+}
+
+.disabled {
+    opacity: 0.0;
+}

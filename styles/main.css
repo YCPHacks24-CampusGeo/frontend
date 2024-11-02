@@ -93,7 +93,7 @@ html, body {
     margin-top: -0.5vh;
     font-size: 4vh;
     font-weight: bold;
-    color: #6ad26a;
+    color: var(--score-color);
     font-family: 'Montserrat', sans-serif;
 }
 

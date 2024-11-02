@@ -1,11 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <link rel="icon" type="image/x-icon" href="/images/YCPGeoLogo-transparent.png">
-    <title>Spectate Game</title>
-</head>
-<body>
-
-</body>
+    <head>
+        <meta charset="UTF-8">
+        <link rel="icon" type="image/x-icon" href="/images/YCPGeoLogo-transparent.png">
+        <link rel="stylesheet" href="/styles/main.css">
+        <link rel="stylesheet" href="/styles/variables.css">
+        <link rel="stylesheet" href="/styles/spectate.css">
+        <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+        <script src="/scripts/api.js"></script>
+        <script src="/scripts/spectate.js"></script>
+        <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+        <title>Spectate Game</title>
+    </head>
+    <body>
+    <div id="nav-bar">
+        <div id="logo">
+            <img id="logo-img" src="/images/YCPGeoLogo-transparent.png">
+        </div>
+        <div id="title">LEADERBOARD</div>
+        <div id="guesses">GUESSES</div>
+        <div id="home-button">
+            <a id="home" href="/">Home</a>
+        </div>
+    </div>
+    <div id="spectator-windows">
+        <div id="map"></div>
+        <div id="leaderboard">
+            <div id="first">
+                <img id="firstImg" class="leaderboard-icon">
+                <span id="firstName" class="leaderboard-name"></span>
+                <span id="firstScore" class="leaderboard-score"></span>
+            </div>
+            <div id="second">
+                <img id="secondImg" class="leaderboard-icon">
+                <span id="secondName" class="leaderboard-name"></span>
+                <span id="secondScore" class="leaderboard-score"></span>
+            </div>
+            <div id="third">
+                <img id="thirdImg" class="leaderboard-icon">
+                <span id="thirdName" class="leaderboard-name"></span>
+                <span id="thirdScore" class="leaderboard-score"></span>
+            </div>
+        </div>
+    </div>
+    </body>
 </html>
