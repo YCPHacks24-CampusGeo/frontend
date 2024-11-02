@@ -69,15 +69,15 @@ function swapLocationMap() {
 }
 
 function changeMapSize() {
+    alert(window.visualViewport.width);
+    alert(window.innerWidth);
     const map = document.getElementById("map");
-    if(window.innerWidth < 1300) {
+    if(window.innerWidth < 600) {
         map.style.width = "50vw";
         map.style.height = "50vw";
-        alert("50");
     } else {
         map.style.width = "20vw";
         map.style.height = "20vw";
-        alert("20");
     }
     mapEnlarged = false;
 }
