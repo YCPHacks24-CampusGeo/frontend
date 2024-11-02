@@ -3,6 +3,16 @@ html, body {
     height: 100%;
 }
 
+#page-title {
+    display: flex;
+    justify-content: center;
+    margin-top: -8.4vh;
+    color: white;
+    font-family: Orbitron, monospace;
+    letter-spacing: 6px;
+    font-size: 6vh;
+}
+
 #nav-bar {
     position: relative;
     height: 10%;
@@ -88,6 +98,11 @@ html, body {
 }
 
 @media (max-width: 1000px) {
+    #page-title {
+        margin-top: -4.25vh;
+        font-size: 2vh;
+    }
+
     #nav-bar {
         height: 5%;
     }

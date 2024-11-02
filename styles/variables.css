@@ -4,4 +4,8 @@
     --home-button-background-hover: rgb(4, 194, 194);
     --guess-button-background: #037a19;
     --guess-button-background-hover: #019b20;
+
+    --button-primary: #00615b;
+    --button-secondary: #2d6c23;
+    --button-tertiary: #659c32;
 }
