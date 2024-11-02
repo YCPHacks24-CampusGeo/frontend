@@ -70,7 +70,7 @@ function swapLocationMap() {
 
 function changeMapSize() {
     const map = document.getElementById("map");
-    if(window.innerWidth < 600) {
+    if(window.innerWidth < 1300) {
         map.style.width = "50vw";
         map.style.height = "50vw";
         alert("50");
