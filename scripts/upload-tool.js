@@ -27,6 +27,7 @@ async function loadMap(input) {
     });
 
     document.getElementById('submit').addEventListener('click', async function () {
+        document.getElementById('submit').disabled = true;
         if (clickedLatLng) {
             uploadObject = {
                 location: {
@@ -37,6 +38,8 @@ async function loadMap(input) {
             }
 
             var status = await ApiRequest('locationupload', 'uploadlocation', 'POST', uploadObject);
+
+            document.getElementById('submit').disabled = false;
 
             if(status === 200) {
                 location.reload();

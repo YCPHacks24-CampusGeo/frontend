@@ -27,7 +27,7 @@ async function ApiRequest(controller, action, method, body = null) {
     } catch (error) {
         console.error('Error:', error);
         console.log('An error occurred.');
-        alert(method + ' error!');
+        alert(error);
     }
 
     return -1;
