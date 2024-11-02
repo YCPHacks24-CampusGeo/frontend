@@ -69,12 +69,10 @@ function swapLocationMap() {
 }
 
 function changeMapSize() {
-    alert(window.visualViewport.width);
-    alert(window.innerWidth);
     const map = document.getElementById("map");
-    if(window.innerWidth < 600) {
-        map.style.width = "50vw";
-        map.style.height = "50vw";
+    if(window.innerWidth < 1000) {
+        map.style.width = "40vw";
+        map.style.height = "40vw";
     } else {
         map.style.width = "20vw";
         map.style.height = "20vw";
