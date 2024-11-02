@@ -9,13 +9,19 @@ let currentMarker = null;
 let playerName = null;
 let playerIcon = null;
 let playerMarker = null;
-let playerScore = "0000";
+let playerScore = 0;
+let roundPoints = 0;
 let marker = null;
+let intermission = false;
 
 async function init() {
     await loadMap('map');
     await loadLocation('panorama');
     await loadToolbar();
+    const element = document.getElementById("guess");
+    if(element) {
+        element.remove();
+    }
 }
 
 async function loadMap(divName) {
@@ -37,28 +43,33 @@ async function loadMap(divName) {
     let clickedLatLng;
 
     map.on('click', async function (e) {
-        if (!mapEnlarged) {
-            await swapLocationMap();
-        } else {
-            if (currentMarker) {
-                map.removeLayer(currentMarker);
-            }
+        if(!intermission) {
+            if (!mapEnlarged) {
+                await swapLocationMap();
+            } else {
+                if (currentMarker) {
+                    map.removeLayer(currentMarker);
+                }
 
-            const lat = e.latlng.lat;
-            const lng = e.latlng.lng;
-            latLng = [lat, lng];
-            currentMarker = L.marker([lat, lng], {icon: marker}).addTo(map);
-            const element = document.getElementById("guess");
-            if(!element) {
-                const button = document.createElement("button");
-                button.id = "guess";
-                button.classList.add("button");
-                button.type = "submit";
-                button.innerHTML = "Guess";
-                document.getElementById("guess-button").appendChild(button);
+                const lat = e.latlng.lat;
+                const lng = e.latlng.lng;
+                latLng = [lat, lng];
+                currentMarker = L.marker([lat, lng], {icon: marker}).addTo(map);
+                const element = document.getElementById("guess");
+                if (!element) {
+                    const button = document.createElement("button");
+                    button.addEventListener("click", async function (e) {
+                        await enterIntermission();
+                    });
+                    button.id = "guess";
+                    button.classList.add("button");
+                    button.type = "submit";
+                    button.innerHTML = "Guess";
+                    document.getElementById("guess-button").appendChild(button);
+                }
+                clickedLatLng = e.latlng;
+                console.log("Clicked coordinates: " + clickedLatLng.lat + ", " + clickedLatLng.lng);
             }
-            clickedLatLng = e.latlng;
-            console.log("Clicked coordinates: " + clickedLatLng.lat + ", " + clickedLatLng.lng);
         }
     });
 }
@@ -104,6 +115,9 @@ async function swapLocationMap() {
         await loadMap('panorama');
         if(currentMarker && !element) {
             const button = document.createElement("button");
+            button.addEventListener("click", async function (e) {
+                await enterIntermission();
+            });
             button.id = "guess";
             button.classList.add("button");
             button.type = "submit";
@@ -149,6 +163,43 @@ async function getPlayerData() {
     playerIcon = `/icons/${body.icon}.jpg`;
     playerMarker = `/markers/${body.icon}.png`
 
+}
+
+async function enterIntermission() {
+    intermission = true;
+    // Panorama will be in the map div
+    document.getElementById("map").classList.add("disabled");
+    document.getElementById("guess-button").classList.add("disabled");
+    // Map will be in the panorama div
+    document.getElementById("panorama").style.pointerEvents = "none";
+    roundPoints = await getPoints();
+    playerScore += roundPoints;
+    document.getElementById("score").innerHTML = `+${roundPoints}`;
+}
+
+async function getPoints() {
+    let response = await ApiRequest("test", "getresults", "GET");
+    let body = await response.json();
+    let guess = [body.guess.location.latitude, body.guess.location.longitude]
+    let correct = [body.correct.latitude, body.correct.longitude]
+    let distance = Math.trunc(body.guess.distance * 100) / 100
+    L.marker(guess, {icon: marker}).addTo(map);
+    L.marker(correct).addTo(map);
+    L.polyline([guess, correct], {color: 'red'}).addTo(map);
+    var midPoint = L.latLng(
+        (guess[0] + correct[0]) / 2,
+        (guess[1] + correct[1]) / 2
+    );
+
+    L.tooltip()
+        .setContent(distance + ' meters')
+        .setLatLng(midPoint)
+        .addTo(map);
+    map.setView(midPoint, 18);
+    console.log(`Guess: ${guess}`)
+    console.log(`Correct: ${correct}`)
+    console.log(`Distance: ${distance}`)
+    return body.guess.points;
 }
 
 window.addEventListener('resize', changeMapSize);
