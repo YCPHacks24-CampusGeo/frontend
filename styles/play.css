@@ -1,0 +1,24 @@
+html, body {
+    height: 100%;
+    margin: 0;
+}
+
+#container {
+    position: relative;
+    height: 100%;
+}
+
+#panorama {
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+}
+
+#map {
+    bottom: 1%;
+    right: 1%;
+    position: absolute;
+    width: 80vh;
+    height: 80vh;
+    border: 0.4vh solid black;
+}

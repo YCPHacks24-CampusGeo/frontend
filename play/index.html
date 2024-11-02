@@ -1,11 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <link rel="icon" type="image/x-icon" href="/images/YCPGeoLogo-transparent.png">
-    <title>Play</title>
-</head>
-<body>
-
-</body>
+    <head>
+        <meta charset="UTF-8">
+        <link rel="icon" type="image/x-icon" href="/images/YCPGeoLogo-transparent.png">
+        <link rel="stylesheet" href="/styles/play.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.css">
+        <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+        <script src="/scripts/play.js"></script>
+        <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.js"></script>
+        <title>Play</title>
+    </head>
+    <body onload="loadMap(); loadLocation('/locations/00xldxp3.51k.jpg'); shrinkMap();">
+        <div id="container">
+            <div id="panorama"></div>
+            <div id="map" onmouseenter="enlargeMap()" onmouseleave="shrinkMap()"></div>
+        </div>
+    </body>
 </html>
