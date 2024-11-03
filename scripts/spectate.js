@@ -92,7 +92,7 @@ async function displayAndPopulateMap() {
     let correctLat = body.correct.geoLocation.latitude
     let correctLon = body.correct.geoLocation.longitude
     L.marker([correctLat, correctLon]).addTo(spectatorMap);
-    spectatorMap.setView([correctLat, correctLon], 17);
+    spectatorMap.setView([correctLat, correctLon], 18);
 }
 
 window.onload = async function () {
