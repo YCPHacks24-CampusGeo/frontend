@@ -1,6 +1,8 @@
+let spectatorMap = null;
+
 async function getLeaderboard() {
     document.getElementById("guesses").classList.add("disabled");
-    const response = await ApiRequest("test", "getscores", "GET");
+    const response = await ApiRequest("Spectate", "GetScores", "GET");
     const body = await response.json();
 
     let first = null;
@@ -53,14 +55,14 @@ async function getLeaderboard() {
 
 async function displayAndPopulateMap() {
     document.getElementById("title").classList.add("disabled");
-    map = L.map("map").setView([39.946952, -76.727429], 18);
+    spectatorMap = L.map("map").setView([39.946952, -76.727429], 18);
 
     L.tileLayer('https://map.ycp.campusgeo.com/{z}/{x}/{y}.png', {
         maxZoom: 20,
         minZoom: 14
-    }).addTo(map);
+    }).addTo(spectatorMap);
 
-    const response = await ApiRequest("test", "getguesses", "GET");
+    const response = await ApiRequest("Spectate", "GetGuesses", "GET");
     const body = await response.json();
 
     body.guesses.forEach(function(item, index, array){
@@ -74,9 +76,37 @@ async function displayAndPopulateMap() {
 
         const lat = item.guess.latitude;
         const lng = item.guess.longitude;
-        L.marker([lat, lng], {icon: marker}).addTo(map);
+        L.marker([lat, lng], {icon: marker}).addTo(spectatorMap);
     });
-    L.marker([body.correct.geoLocation.latitude, body.correct.geoLocation.longitude]).addTo(map);
+    L.marker([body.correct.geoLocation.latitude, body.correct.geoLocation.longitude]).addTo(spectatorMap);
 }
 
-document.addEventListener('DOMContentLoaded', getLeaderboard);
+window.onload = async function () {
+    const params = new URLSearchParams(window.location.search);
+    const myParam = params.get('gameid');
+
+    if (myParam) {
+        const response = await ApiRequest("Spectate", `WatchGame?gameId=${myParam}`, "GET");
+        console.log(response);
+        if(response.status !== 200) {
+            alert("Invalid Game ID");
+            window.location.href = '/';
+        }
+        window.location.href = '/spectate'
+    } else {
+        console.log('Parameter not found');
+    }
+};
+
+function stateChange(oldState, newState) {
+    console.log(`State Change: ${oldState} to ${newState}`);
+    if(newState === GameStates.INTERMISSION) {
+        displayAndPopulateMap();
+    } else {
+        spectatorMap.remove();
+        getLeaderboard();
+    }
+}
+
+SubscribeGameState(stateChange);
+stateChange(null, GameState);

@@ -1,13 +1,13 @@
 let background = null;
-let splashtexts = ["Now with more cookies!", "[Insert cool text here]",
+let splashtexts = ["Now with more cookies :)", "[Insert cool text here]",
     "No bugs here!", "Built in 48 hours!", "Better than the original!",
     "We only broke a few rules!", "Dr. Burns approved!", "H-O-T-T-O-G-O", "\"UwU\"",
-    "No sanity was lost!", "Mark saved the project!"]
+    "No sanity was lost!", "Mark saved the project!", "Bye, bye, bye!"]
 
 function play_button() {
     let gameid = getGameId();
     if (!gameid) return;
-    window.location.href = `/play?gameid=${gameid}`;
+    window.location.href = `/frontend/play/?gameid=${gameid}`;
 }
 
 function host_button() {
@@ -17,7 +17,7 @@ function host_button() {
 function spectate_button() {
     let gameid = getGameId();
     if (!gameid) return;
-    window.location.href = `/spectate?gameid=${gameid}`;
+    window.location.href = `/spectate/?gameid=${gameid}`;
 }
 
 

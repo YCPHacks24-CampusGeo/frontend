@@ -61,6 +61,7 @@ async function loadMap(divName) {
                 if (!element) {
                     const button = document.createElement("button");
                     button.addEventListener("click", async function (e) {
+                        await makeGuess();
                         await enterIntermission();
                     });
                     button.id = "guess";
@@ -118,6 +119,7 @@ async function swapLocationMap() {
         if(currentMarker && !element) {
             const button = document.createElement("button");
             button.addEventListener("click", async function (e) {
+                await makeGuess();
                 await enterIntermission();
             });
             button.id = "guess";
@@ -153,18 +155,27 @@ function changeMapSize() {
 }
 
 async function getImage() {
-    let response = await ApiRequest("test", "getlocation", "GET");
+    let response = await ApiRequest("User", "GetGuessImage", "GET");
     let body = await response.json();
     return body.imageKey;
 }
 
 async function getPlayerData() {
-    let response = await ApiRequest("test", "geticon", "GET");
+    let response = await ApiRequest("User", "GetPlayerIcon", "GET");
     let body = await response.json();
     playerName = body.name;
     playerIcon = `/icons/${body.icon}.jpg`;
     playerMarker = `/markers/${body.icon}.png`
 
+}
+
+async function makeGuess() {
+    let geolocation = {
+        latitude: latLng[0],
+        longitude: latLng[1]
+    }
+    let response = await ApiRequest("User", "MakeGuess", "POST", geolocation);
+    console.log(response);
 }
 
 async function enterIntermission() {
@@ -180,7 +191,7 @@ async function enterIntermission() {
 }
 
 async function getPoints() {
-    let response = await ApiRequest("test", "getresults", "GET");
+    let response = await ApiRequest("User", "GetPlayerResults", "GET");
     let body = await response.json();
     let guess = [body.guess.location.latitude, body.guess.location.longitude]
     let correct = [body.correct.latitude, body.correct.longitude]
@@ -224,3 +235,20 @@ function addMapEventListeners() {
 
 window.addEventListener('resize', changeMapSize);
 document.addEventListener('DOMContentLoaded', init);
+
+window.onload = async function () {
+    const params = new URLSearchParams(window.location.search);
+    const myParam = params.get('gameid');
+
+    if (myParam) {
+        const response = await ApiRequest("User", `JoinGame?gameId=${myParam}`, "GET");
+        console.log(response);
+        if(response.status !== 200) {
+            alert("Invalid Game ID");
+            window.location.href = '/';
+        }
+        window.location.href = '/play'
+    } else {
+        console.log('Parameter not found');
+    }
+};

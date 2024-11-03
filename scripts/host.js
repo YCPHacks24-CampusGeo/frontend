@@ -1,7 +1,9 @@
-function generateQRCode() {
-    var qrcode = new QRCode("qrcode",
-        "https://ycp.campusgeo.com/play?gameid=123456");
-    //get actual game code from api
+async function generateGameInfo() {
+    let result = await ApiRequest("Game", "GetGameId", 'GET');
+    let gameid = await result.json();
+    new QRCode("qrcode", `https://ycp.campusgeo.com/play/?gameid=${gameid}`);
+    document.getElementById('game-id').innerHTML = gameid;
+    document.getElementById('game-link').innerHTML = `https://ycp.campusgeo.com/play/?gameid=${gameid}`;
 }
 
 function addCopyListeners() {
@@ -22,6 +24,11 @@ function addCopyListeners() {
             console.error('Failed to copy: ', err);
         });
     });
+}
+
+async function startGame() {
+    await ApiRequest("Host", "StartGame", 'POST');
+    document.getElementById('start-button').remove();
 }
 
 document.addEventListener('DOMContentLoaded', addCopyListeners);
