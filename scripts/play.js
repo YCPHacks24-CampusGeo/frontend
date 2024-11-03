@@ -14,8 +14,6 @@ let intermission = false;
 let isDragging = false;
 
 async function init() {
-    await loadMap('map');
-    await loadLocation('panorama');
     await loadToolbar();
     addMapEventListeners();
     const element = document.getElementById("guess");
@@ -75,9 +73,14 @@ async function loadMap(divName) {
 }
 
 async function loadLocation(divName){
-    if(curImg == null) {
-        curImg = `/locations/${await getImage()}.jpg`;
+    async function getImage() {
+        let response = await ApiRequest("User", "GetGuessImage", "GET");
+        return await response.text();
     }
+
+
+    curImg = `/locations/${await getImage()}.jpg`;
+
 
     viewer = pannellum.viewer(divName, {
         "type": "equirectangular",
@@ -92,7 +95,7 @@ async function loadToolbar() {
     await getPlayerData();
     document.getElementById("icon").src = playerIcon;
     document.getElementById("name").innerHTML = playerName;
-    document.getElementById("score").innerHTML = await ApiRequest("User", "GetPlayerScore", "GET");
+    document.getElementById("score").innerHTML = await (await ApiRequest("User", "GetPlayerScore", "GET")).text();
 }
 
 async function swapLocationMap() {
@@ -100,8 +103,12 @@ async function swapLocationMap() {
     setTimeout(() => {
         onCooldown = false;
     }, 2000);
-    map.remove();
-    viewer.destroy();
+    if(map) {
+        map.remove();
+    }
+    if(viewer) {
+        viewer.destroy();
+    }
     const element = document.getElementById("guess");
     if (swapped) {
         if(element) {
@@ -150,12 +157,6 @@ function changeMapSize() {
     map.style.borderRadius = "5px";
 }
 
-async function getImage() {
-    let response = await ApiRequest("User", "GetGuessImage", "GET");
-    let body = await response.json();
-    return body.imageKey;
-}
-
 async function getPlayerData() {
     let response = await ApiRequest("User", "GetPlayerIcon", "GET");
     let body = await response.json();
@@ -171,35 +172,63 @@ async function makeGuess() {
         longitude: latLng[1]
     }
     await ApiRequest("User", "MakeGuess", "POST", geolocation);
-    document.getElementById("map").classList.add("disabled");
+    //document.getElementById("map").classList.add("disabled");
     document.getElementById("guess-button").classList.add("disabled");
-    document.getElementById("panorama").style.pointerEvents = "none";
-    await getRoundResult();
-    document.getElementById("score").innerHTML = await ApiRequest("User", "GetPlayerScore", "GET");
+    document.getElementById("container").style.pointerEvents = "none";
+    document.getElementById("score").innerHTML = await (await ApiRequest("User", "GetPlayerScore", "GET")).text();
+
 }
 
 async function getRoundResult() {
     let response = await ApiRequest("User", "GetPlayerResults", "GET");
     let body = await response.json();
-    let guess = [body.guess.location.latitude, body.guess.location.longitude]
-    let correct = [body.correct.latitude, body.correct.longitude]
-    let distance = Math.trunc(body.guess.distance * 100) / 100
-    L.marker(guess, {icon: marker}).addTo(map);
-    L.marker(correct).addTo(map);
-    L.polyline([guess, correct], {color: 'red'}).addTo(map);
-    var midPoint = L.latLng(
-        (guess[0] + correct[0]) / 2,
-        (guess[1] + correct[1]) / 2
-    );
+    if(body.guess !== null) {
 
-    L.tooltip()
-        .setContent(distance + ' meters')
-        .setLatLng(midPoint)
-        .addTo(map);
-    map.setView(midPoint, 18);
-    console.log(`Guess: ${guess}`)
-    console.log(`Correct: ${correct}`)
-    console.log(`Distance: ${distance}`)
+        let guess = [body.guess.location.latitude, body.guess.location.longitude];
+        let correct = [body.correct.latitude, body.correct.longitude];
+        let distance = Math.trunc(body.guess.distance * 100) / 100;
+
+        document.getElementById("score").innerHTML = `+${body.guess.points}`;
+
+        L.marker(guess, {icon: marker}).addTo(map);
+        L.marker(correct).addTo(map);
+
+        L.polyline([guess, correct], {color: 'red'}).addTo(map);
+        var midPoint = L.latLng(
+            (guess[0] + correct[0]) / 2,
+            (guess[1] + correct[1]) / 2
+        );
+
+        L.tooltip()
+            .setContent(distance + ' meters')
+            .setLatLng(midPoint)
+            .addTo(map);
+
+        map.setView(midPoint, 18);
+
+        console.log(`Guess: ${guess}`)
+        console.log(`Correct: ${correct}`)
+        console.log(`Distance: ${distance}`)
+    }
+}
+
+async function initializeGuessPeriod() {
+    if (map) {
+        map.remove();
+    }
+    if(viewer) {
+        viewer.destroy();
+    }
+    await loadMap("map");
+    await loadLocation("panorama");
+    document.getElementById("score").innerHTML = await (await ApiRequest("User", "GetPlayerScore", "GET")).text();
+}
+
+async function initializeIntermissionPeriod() {
+    if(viewer) {
+        viewer.destroy();
+    }
+    await getRoundResult();
 }
 
 function addMapEventListeners() {
@@ -240,10 +269,25 @@ window.onload = async function () {
     }
 };
 
-function stateChange(oldState, newState) {
+async function stateChange(oldState, newState) {
     console.log(`State Change: ${oldState} to ${newState}`);
-    if(newState === GameStates.INTERMISSION) {
+    if (newState === GameStates.INTERMISSION) {
         intermission = true;
+        initializeIntermissionPeriod()
+    } else if (newState === GameStates.GUESS) {
+        initializeGuessPeriod()
+        document.getElementById("guess-button").classList.remove("disabled");
+        document.getElementById("container").style.pointerEvents = "all";
+        document.getElementById("wait-message").style.opacity = "0.0";
+        intermission = false;
+    } else if (newState === GameStates.COMPLETE) {
+        document.getElementById("score").innerHTML = await (await ApiRequest("User", "GetPlayerScore", "GET")).text();
+        document.getElementById("guess-button").style.opacity = "0";
+        document.getElementById("panorama").style.opacity = "0";
+        document.getElementById("map").style.opacity = "0";
+        document.getElementById("wait-message").innerHTML = "Nice Job!";
+        document.getElementById("wait-message").style.opacity = "1";
+        intermission = false;
     } else {
         intermission = false;
     }

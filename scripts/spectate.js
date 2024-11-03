@@ -1,6 +1,7 @@
 let spectatorMap = null;
 
 async function getLeaderboard() {
+    document.getElementById("wait-message").style.opacity = "0.0";
     document.getElementById("map").style.opacity = "0.0";
     document.getElementById("leaderboard").style.opacity = "1.0";
     document.getElementById("title").style.opacity = "1.0";
@@ -58,6 +59,7 @@ async function getLeaderboard() {
 }
 
 async function displayAndPopulateMap() {
+    document.getElementById("wait-message").style.opacity = "0.0";
     document.getElementById("map").style.opacity = "1.0";
     document.getElementById("leaderboard").style.opacity = "0.0";
     document.getElementById("title").style.opacity = "0.0";
@@ -114,7 +116,7 @@ function stateChange(oldState, newState) {
     console.log(`State Change: ${oldState} to ${newState}`);
     if(newState === GameStates.INTERMISSION) {
         displayAndPopulateMap();
-    } else {
+    } else if(newState === GameStates.GUESS || newState === GameStates.COMPLETE) {
         if(spectatorMap) {
             spectatorMap.remove();
         }

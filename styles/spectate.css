@@ -137,6 +137,14 @@ html, body {
     margin-top: 11vh;
 }
 
+#wait-message {
+    text-align: center;
+    width: 40%;
+    font-size: 6vh;
+    margin-left: 30vw;
+    margin-top: 10vh;
+}
+
 @media(max-width: 1000px) {
     #title {
         margin-top: -5vh;
