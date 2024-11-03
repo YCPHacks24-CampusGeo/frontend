@@ -138,6 +138,7 @@ html, body {
 }
 
 #wait-message {
+    position: absolute;
     text-align: center;
     width: 40%;
     font-size: 6vh;

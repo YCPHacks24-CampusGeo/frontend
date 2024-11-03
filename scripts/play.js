@@ -276,6 +276,7 @@ async function stateChange(oldState, newState) {
         initializeIntermissionPeriod()
     } else if (newState === GameStates.GUESS) {
         initializeGuessPeriod()
+        document.getElementById("map").style.border = "0.3vh solid green";
         document.getElementById("guess-button").classList.remove("disabled");
         document.getElementById("container").style.pointerEvents = "all";
         document.getElementById("wait-message").style.opacity = "0.0";

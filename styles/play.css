@@ -93,7 +93,6 @@ html, body {
         position: absolute;
         width: 100vw;
         height: 100vw;
-        border: 0.3vh solid green;
         border-radius: 5px;
         z-index: 10;
     }
