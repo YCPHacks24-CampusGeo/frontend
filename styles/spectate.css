@@ -148,9 +148,15 @@ html, body {
 
 #timer {
     position: absolute;
+    bottom: 0;
+    margin-bottom: 5vh;
+    margin-left: 3vw;
     text-align: center;
-    margin-left: 10vw;
-    margin-top: 50vh;
+    font-size: 6vh;
+    opacity: 0.0;
+    width: 10vw;
+    background-color: white;
+    outline: 1px solid black;
 }
 
 @media(max-width: 1000px) {
