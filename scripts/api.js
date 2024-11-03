@@ -1,10 +1,12 @@
 const apiURL = 'https://api.ycp.campusgeo.com'
 
+
 async function ApiRequest(controller, action, method, body = null) {
     let response = null;
     try {
-        var request = {
+        let request = {
             method: method,
+            credentials: 'include'
         }
 
         if (body != null) {
@@ -12,7 +14,6 @@ async function ApiRequest(controller, action, method, body = null) {
             request.headers = {
                 'Content-Type': 'application/json',
             };
-            request.credentials = 'include';
         }
 
         response = await fetch(apiURL + '/' + controller + '/' + action, request);
@@ -29,3 +30,4 @@ async function ApiRequest(controller, action, method, body = null) {
 
     return response;
 }
+

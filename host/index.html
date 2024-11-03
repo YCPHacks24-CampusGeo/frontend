@@ -9,6 +9,7 @@
     <script src="/scripts/host.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
     <title>Host Game</title>
+    <script src="/scripts/api.js"></script>
 </head>
 <body onload="generateQRCode()">
     <div id="nav-bar">
@@ -35,19 +36,14 @@
         </div>
     </div>
     <script>
-        function getCookieValue(name) {
-            let cookies = document.cookie.split(';');
-            for (let cookie of cookies) {
-                let [key, value] = cookie.split('=');
-                key = key.trim();
-                if (key === name) {
-                    return value;
-                }
-            }
-            return null;
+
+
+        async function testing() {
+            let result = await ApiRequest("game", "getgameid", 'GET');
+            console.log(await result.json());
         }
 
-        console.log(getCookieValue("GameId"));
+        document.addEventListener('DOMContentLoaded', testing);
     </script>
 </body>
 </html>

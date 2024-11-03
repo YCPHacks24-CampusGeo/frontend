@@ -8,9 +8,24 @@
     box-sizing: border-box;
 }
 
+#title {
+    position: absolute;
+    color: white;
+    font-size: 5vw;
+    font-family: Orbitron, monospace;
+    margin-top: -11vh;
+    width: 100%;
+    text-align: center;
+}
+
 @media (max-width: 1000px) {
     #container {
         height: calc(100% - 5%);
+    }
+
+    #title {
+        margin-top: -5vh;
+        font-size: 4vw;
     }
 }
 
