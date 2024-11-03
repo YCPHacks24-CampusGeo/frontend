@@ -31,6 +31,7 @@ html, body {
 }
 
 #home-button {
+    z-index: 2;
     position: absolute;
     display: flex;
     justify-content: flex-end;
@@ -45,6 +46,7 @@ html, body {
 }
 
 #home {
+    z-index: 2;
     display: inline-block;
     text-decoration: none;
     color: white;

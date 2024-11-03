@@ -2,10 +2,38 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <link rel="icon" type="image/x-icon" href="/images/YCPGeoLogo-transparent.png">
+    <link rel="icon" type="image/x-icon" href="/images/YCPGeoLogo-transparent-favicon.png" >
+    <link rel="stylesheet" href="/styles/main.css">
+    <link rel="stylesheet" href="/styles/variables.css">
+    <link rel="stylesheet" href="/styles/host.css">
+    <script src="/scripts/host.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
     <title>Host Game</title>
 </head>
-<body>
+<body onload="generateQRCode()">
+    <div id="nav-bar">
+        <div id="logo">
+            <img id="logo-img" src="/images/YCPGeoLogo-transparent.png">
+        </div>
+        <div id="home-button">
+            <a id="home" href="/spectate">&lt;Ꙩ&gt;</a>
+        </div>
+    <div id="title">HOST A GAME</div>
+    </div>
+    <div id="host-content">
+        <div id="qrcode"></div>
+        <div class="copy-block" id="copy-id">
+            <img src="/images/copy-icon.jpg" alt="Copy" id="copy-image-id" class="copy-icon">
+            <div id="game-id">123456</div>
+        </div>
+        <div class="copy-block" id="copy-link">
+            <img src="/images/copy-icon.jpg" alt="Copy" id="copy-image-link" class="copy-icon">
+            <div id="game-link">https://ycp.campusgeo.com/play?gameid=123456</div>
+        </div>
+        <div id="start-game">
+            <button id="start-button">Start</button>
+        </div>
+    </div>
     <script>
         function getCookieValue(name) {
             let cookies = document.cookie.split(';');

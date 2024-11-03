@@ -1,0 +1,90 @@
+html,body {
+    height: 100%;
+}
+
+#title {
+    position: absolute;
+    color: white;
+    font-size: 5vw;
+    font-family: Orbitron, monospace;
+    margin-top: -11vh;
+    width: 100%;
+    text-align: center;
+}
+
+#host-content {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 10vh;
+}
+
+#qrcode {
+    text-align: center;
+}
+
+.copy-icon {
+    height: 5vh;
+    margin-right: 1vw;
+}
+
+.copy-block {
+    margin-top: 4vh;
+    display: flex;
+}
+
+.copy-block:hover {
+    cursor: pointer;
+}
+
+#copy-id, #copy-link {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+#copy-link {
+    margin-bottom: 4vh;
+}
+
+#game-id, #game-link {
+    text-decoration: underline;
+}
+
+#start-game {
+    transition: all .15s ease-out;
+    margin-right: 10vh;
+}
+
+#start-game:hover {
+    transform: translateY(0.5vh);
+}
+
+#start-button {
+    display: inline-block;
+    text-decoration: none;
+    color: white;
+    font-size: 3vh;
+    font-weight: bold;
+    font-family: 'Montserrat', sans-serif;
+    background-color: var(--home-button-background);
+    padding: 20% 80%;
+    border-radius: 10vh;
+    box-shadow: 0.5vh 0.5vh 0.25vh 0 rgba(0, 0, 0, 0.65);
+}
+
+#start-button:hover {
+    cursor: pointer;
+    background-color: var(--home-button-background-hover);
+    box-shadow: 0.3vh 0.3vh 0.15vh 0 rgba(0, 0, 0, 0.65);
+}
+
+@media(max-width: 1000px) {
+    #title {
+        margin-top: -5vh;
+        font-size: 4vw;
+    }
+}
