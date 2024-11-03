@@ -7,7 +7,7 @@ let splashtexts = ["Now with more cookies :)", "[Insert cool text here]",
 function play_button() {
     let gameid = getGameId();
     if (!gameid) return;
-    window.location.href = `/frontend/play/?gameid=${gameid}`;
+    window.location.href = `/play/?gameid=${gameid}`;
 }
 
 function host_button() {
