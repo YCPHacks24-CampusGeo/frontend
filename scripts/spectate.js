@@ -1,6 +1,8 @@
 let spectatorMap = null;
 
 async function getLeaderboard() {
+    document.getElementById("map").style.opacity = "0.0";
+    document.getElementById("leaderboard").style.opacity = "1.0";
     document.getElementById("guesses").classList.add("disabled");
     const response = await ApiRequest("Spectate", "GetScores", "GET");
     const body = await response.json();
@@ -54,6 +56,8 @@ async function getLeaderboard() {
 }
 
 async function displayAndPopulateMap() {
+    document.getElementById("map").style.opacity = "1.0";
+    document.getElementById("leaderboard").style.opacity = "0.0";
     document.getElementById("title").classList.add("disabled");
     spectatorMap = L.map("map").setView([39.946952, -76.727429], 18);
 
@@ -74,9 +78,11 @@ async function displayAndPopulateMap() {
             iconSize: [33, 47]
         });
 
-        const lat = item.guess.latitude;
-        const lng = item.guess.longitude;
-        L.marker([lat, lng], {icon: marker}).addTo(spectatorMap);
+        if(item.guess !== null) {
+            const lat = item.guess.latitude;
+            const lng = item.guess.longitude;
+            L.marker([lat, lng], {icon: marker}).addTo(spectatorMap);
+        }
     });
     L.marker([body.correct.geoLocation.latitude, body.correct.geoLocation.longitude]).addTo(spectatorMap);
 }
