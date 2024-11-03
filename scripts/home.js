@@ -1,4 +1,8 @@
 let background = null;
+let splashtexts = ["Now with more cookies!", "[Insert cool text here]",
+    "No bugs here!", "Built in 48 hours!", "Better than the original!",
+    "We only broke a few rules!", "Dr. Burns approved!", "H-O-T-T-O-G-O", "\"UwU\"",
+    "No sanity was lost!"]
 
 function play_button() {
     let gameid = getGameId();
@@ -34,4 +38,11 @@ async function setRandomBackground() {
     });
 }
 
+function chooseSplashText() {
+    let text = splashtexts[Math.floor(Math.random() * splashtexts.length)];
+    document.getElementById("splash-text").innerHTML = text;
+    document.getElementById("splash-text-shadow").innerHTML = text;
+}
+
 document.addEventListener('DOMContentLoaded', setRandomBackground);
+document.addEventListener('DOMContentLoaded', chooseSplashText);
