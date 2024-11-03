@@ -13,8 +13,7 @@
 
         async function testing() {
             let result = await ApiRequest("game", "getgameid", 'GET');
-            console.log(result);
-            console.log(result.statusCode)
+            console.log(await result.json());
         }
 
         document.addEventListener('DOMContentLoaded', testing);
