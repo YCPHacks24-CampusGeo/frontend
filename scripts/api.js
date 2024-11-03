@@ -1,5 +1,6 @@
 const apiURL = 'https://api.ycp.campusgeo.com'
 
+
 async function ApiRequest(controller, action, method, body = null) {
     let response = null;
     try {
@@ -13,8 +14,6 @@ async function ApiRequest(controller, action, method, body = null) {
             request.headers = {
                 'Content-Type': 'application/json',
             };
-            //Remove the following line of code
-            //request.credentials = 'include';
         }
 
         response = await fetch(apiURL + '/' + controller + '/' + action, request);
@@ -32,4 +31,3 @@ async function ApiRequest(controller, action, method, body = null) {
     return response;
 }
 
-//This does not promise that every request possesses the cookies in the
