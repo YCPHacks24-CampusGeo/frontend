@@ -28,7 +28,7 @@ async function setRandomBackground() {
         "type": "equirectangular",
         "panorama": `/locations/${body.imageKey}.jpg`,
         "autoLoad": true,
-        "autoRotate": 3,
+        "autoRotate": 2,
         "compass": false,
         "showControls": false
     });
