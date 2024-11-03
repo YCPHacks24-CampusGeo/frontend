@@ -109,7 +109,9 @@ function stateChange(oldState, newState) {
     if(newState === GameStates.INTERMISSION) {
         displayAndPopulateMap();
     } else {
-        spectatorMap.remove();
+        if(spectatorMap) {
+            spectatorMap.remove();
+        }
         getLeaderboard();
     }
 }
