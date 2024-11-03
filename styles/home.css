@@ -75,6 +75,12 @@ button:nth-child(3) {
     z-index: 999;
 }
 
+#menu-panorama {
+    position: absolute;
+    z-index: -1;
+    opacity: 0.3;
+}
+
 @media (max-width: 1000px) {
     #container {
         height: calc(100% - 5%);
