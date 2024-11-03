@@ -12,6 +12,7 @@ async function ApiRequest(controller, action, method, body = null) {
             request.headers = {
                 'Content-Type': 'application/json',
             };
+            request.credentials = 'include';
         }
 
         response = await fetch(apiURL + '/' + controller + '/' + action, request);

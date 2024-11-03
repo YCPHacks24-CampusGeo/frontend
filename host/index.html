@@ -6,6 +6,20 @@
     <title>Host Game</title>
 </head>
 <body>
-    Host
+    <script>
+        function getCookieValue(name) {
+            let cookies = document.cookie.split(';');
+            for (let cookie of cookies) {
+                let [key, value] = cookie.split('=');
+                key = key.trim();
+                if (key === name) {
+                    return value;
+                }
+            }
+            return null;
+        }
+
+        console.log(getCookieValue("GameId"));
+    </script>
 </body>
 </html>
