@@ -82,6 +82,18 @@ html, body {
     margin-top: 10vh;
 }
 
+#timer {
+
+    position: absolute;
+    margin-top: 80vh;
+    margin-left: 3vw;
+    font-size: 10vh;
+    opacity: 0.0;
+    width: 250px;
+    background-color: white;
+    outline: 1px solid black;
+}
+
 @media (max-width: 1000px) {
     #container {
         height: 95%;

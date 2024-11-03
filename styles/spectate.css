@@ -146,6 +146,13 @@ html, body {
     margin-top: 10vh;
 }
 
+#timer {
+    position: absolute;
+    text-align: center;
+    margin-left: 10vw;
+    margin-top: 50vh;
+}
+
 @media(max-width: 1000px) {
     #title {
         margin-top: -5vh;

@@ -8,7 +8,7 @@ const GameStates = Object.freeze({
 let GameState = null;
 let TimeLeft = null;
 
-setInterval(CallGetState, 750);
+setInterval(CallGetState, 500);
 
 let GameStateSubscriber;
 let TimeLeftSubscriber;

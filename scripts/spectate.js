@@ -115,14 +115,25 @@ window.onload = async function () {
 function stateChange(oldState, newState) {
     console.log(`State Change: ${oldState} to ${newState}`);
     if(newState === GameStates.INTERMISSION) {
+        document.getElementById("timer").style.opacity = "1.0";
         displayAndPopulateMap();
-    } else if(newState === GameStates.GUESS || newState === GameStates.COMPLETE) {
+    } else if(newState === GameStates.GUESS) {
+        document.getElementById("timer").style.opacity = "1.0";
         if(spectatorMap) {
             spectatorMap.remove();
         }
         getLeaderboard();
+    } else if(newState === GameStates.COMPLETE) {
+        document.getElementById("timer").style.opacity = "0.0";
+
     }
 }
 
+function updateTime(timeLeft) {
+    document.getElementById("timer").innerHTML = timeLeft;
+    console.log(timeLeft)
+}
+
 SubscribeGameState(stateChange);
+SubscribeTimeLeft(updateTime);
 stateChange(null, GameState);

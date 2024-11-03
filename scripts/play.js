@@ -262,6 +262,7 @@ window.onload = async function () {
         if(response.status !== 200) {
             alert("Invalid Game ID");
             window.location.href = '/';
+            return;
         }
         window.location.href = '/play'
     } else {
@@ -273,15 +274,18 @@ async function stateChange(oldState, newState) {
     console.log(`State Change: ${oldState} to ${newState}`);
     if (newState === GameStates.INTERMISSION) {
         intermission = true;
+        document.getElementById("timer").style.opacity = "1.0";
         initializeIntermissionPeriod()
     } else if (newState === GameStates.GUESS) {
         initializeGuessPeriod()
+        document.getElementById("timer").style.opacity = "1.0";
         document.getElementById("map").style.border = "0.3vh solid green";
         document.getElementById("guess-button").classList.remove("disabled");
         document.getElementById("container").style.pointerEvents = "all";
         document.getElementById("wait-message").style.opacity = "0.0";
         intermission = false;
     } else if (newState === GameStates.COMPLETE) {
+        document.getElementById("timer").style.opacity = "0.0";
         document.getElementById("score").innerHTML = await (await ApiRequest("User", "GetPlayerScore", "GET")).text();
         document.getElementById("guess-button").style.opacity = "0";
         document.getElementById("panorama").style.opacity = "0";
@@ -294,5 +298,11 @@ async function stateChange(oldState, newState) {
     }
 }
 
+function updateTime(timeLeft) {
+    document.getElementById("timer").innerHTML = timeLeft;
+    console.log(timeLeft)
+}
+
 SubscribeGameState(stateChange);
+SubscribeTimeLeft(updateTime);
 stateChange(null, GameState);
