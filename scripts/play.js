@@ -9,8 +9,6 @@ let currentMarker = null;
 let playerName = null;
 let playerIcon = null;
 let playerMarker = null;
-let playerScore = 0;
-let roundPoints = 0;
 let marker = null;
 let intermission = false;
 let isDragging = false;
@@ -62,7 +60,6 @@ async function loadMap(divName) {
                     const button = document.createElement("button");
                     button.addEventListener("click", async function (e) {
                         await makeGuess();
-                        await enterIntermission();
                     });
                     button.id = "guess";
                     button.classList.add("button");
@@ -95,7 +92,7 @@ async function loadToolbar() {
     await getPlayerData();
     document.getElementById("icon").src = playerIcon;
     document.getElementById("name").innerHTML = playerName;
-    document.getElementById("score").innerHTML = playerScore;
+    document.getElementById("score").innerHTML = await ApiRequest("User", "GetPlayerScore", "GET");
 }
 
 async function swapLocationMap() {
@@ -120,7 +117,6 @@ async function swapLocationMap() {
             const button = document.createElement("button");
             button.addEventListener("click", async function (e) {
                 await makeGuess();
-                await enterIntermission();
             });
             button.id = "guess";
             button.classList.add("button");
@@ -174,23 +170,15 @@ async function makeGuess() {
         latitude: latLng[0],
         longitude: latLng[1]
     }
-    let response = await ApiRequest("User", "MakeGuess", "POST", geolocation);
-    console.log(response);
-}
-
-async function enterIntermission() {
-    intermission = true;
-    // Panorama will be in the map div
+    await ApiRequest("User", "MakeGuess", "POST", geolocation);
     document.getElementById("map").classList.add("disabled");
     document.getElementById("guess-button").classList.add("disabled");
-    // Map will be in the panorama div
     document.getElementById("panorama").style.pointerEvents = "none";
-    roundPoints = await getPoints();
-    playerScore += roundPoints;
-    document.getElementById("score").innerHTML = `+${roundPoints}`;
+    await getRoundResult();
+    document.getElementById("score").innerHTML = await ApiRequest("User", "GetPlayerScore", "GET");
 }
 
-async function getPoints() {
+async function getRoundResult() {
     let response = await ApiRequest("User", "GetPlayerResults", "GET");
     let body = await response.json();
     let guess = [body.guess.location.latitude, body.guess.location.longitude]
@@ -212,7 +200,6 @@ async function getPoints() {
     console.log(`Guess: ${guess}`)
     console.log(`Correct: ${correct}`)
     console.log(`Distance: ${distance}`)
-    return body.guess.points;
 }
 
 function addMapEventListeners() {
@@ -252,3 +239,15 @@ window.onload = async function () {
         console.log('Parameter not found');
     }
 };
+
+function stateChange(oldState, newState) {
+    console.log(`State Change: ${oldState} to ${newState}`);
+    if(newState === GameStates.INTERMISSION) {
+        intermission = true;
+    } else {
+        intermission = false;
+    }
+}
+
+SubscribeGameState(stateChange);
+stateChange(null, GameState);
