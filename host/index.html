@@ -4,22 +4,20 @@
     <meta charset="UTF-8">
     <link rel="icon" type="image/x-icon" href="/images/YCPGeoLogo-transparent.png">
     <title>Host Game</title>
+    <script src="/scripts/main.js"></script>
+    <script src="/scripts/api.js"></script>
 </head>
 <body>
     <script>
-        function getCookieValue(name) {
-            let cookies = document.cookie.split(';');
-            for (let cookie of cookies) {
-                let [key, value] = cookie.split('=');
-                key = key.trim();
-                if (key === name) {
-                    return value;
-                }
-            }
-            return null;
+
+
+        async function testing() {
+            let result = await ApiRequest("game", "getgameid", 'GET');
+            console.log(result);
+            console.log(result.statusCode)
         }
 
-        console.log(getCookieValue("GameId"));
+        document.addEventListener('DOMContentLoaded', testing);
     </script>
 </body>
 </html>
