@@ -20,7 +20,5 @@ async function submitValues() {
 
     console.log(`Match created: ${(await result.json())}`);
 
-    //alert()
-
-    //window.location.replace('/host');
+    window.location.href = "/host"
 }
