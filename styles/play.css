@@ -83,11 +83,13 @@ html, body {
 #timer {
 
     position: absolute;
-    margin-top: 80vh;
-    margin-left: 3vw;
-    font-size: 10vh;
+    right: 0;
+    margin-top: 5vh;
+    margin-right: 2vw;
+    text-align: center;
+    font-size: 6vh;
     opacity: 0.0;
-    width: 250px;
+    width: 10vw;
     background-color: white;
     outline: 1px solid black;
 }
