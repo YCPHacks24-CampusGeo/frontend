@@ -278,8 +278,9 @@ async function stateChange(oldState, newState) {
         initializeIntermissionPeriod()
     } else if (newState === GameStates.GUESS) {
         initializeGuessPeriod()
+        document.getElementById("map").style.boxShadow = "0.5vh 0.5vh 0.25vh 0 rgba(0, 0, 0, 0.65);";
         document.getElementById("timer").style.opacity = "1.0";
-        document.getElementById("map").style.border = "0.3vh solid green";
+        document.getElementById("map").style.border = "0.4vh solid green";
         document.getElementById("guess-button").classList.remove("disabled");
         document.getElementById("container").style.pointerEvents = "all";
         document.getElementById("wait-message").style.opacity = "0.0";
@@ -299,7 +300,7 @@ async function stateChange(oldState, newState) {
 }
 
 function updateTime(timeLeft) {
-    document.getElementById("timer").innerHTML = timeLeft;
+    document.getElementById("timer").innerHTML = `${Math.floor(timeLeft / 10) / 100}s`;
     console.log(timeLeft)
 }
 

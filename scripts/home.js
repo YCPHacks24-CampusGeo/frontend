@@ -2,7 +2,7 @@ let background = null;
 let splashtexts = ["Now with more cookies :)", "[Insert cool text here]",
     "No bugs here!", "Built in 48 hours!", "Better than the original!",
     "We only broke a few rules!", "Dr. Burns approved!", "H-O-T-T-O-G-O", "\"UwU\"",
-    "No sanity was lost!", "Mark saved the project!", "Bye, bye, bye!"]
+    "No sanity was lost!", "Mark saved the project!", "Bye, bye, bye!", "The best thing since sliced bread!"]
 
 function play_button() {
     let gameid = getGameId();

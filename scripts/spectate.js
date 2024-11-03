@@ -130,7 +130,7 @@ function stateChange(oldState, newState) {
 }
 
 function updateTime(timeLeft) {
-    document.getElementById("timer").innerHTML = timeLeft;
+    document.getElementById("timer").innerHTML = `${Math.floor(timeLeft / 10) / 100}s`;
     console.log(timeLeft)
 }
 
