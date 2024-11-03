@@ -120,11 +120,11 @@ html, body {
         position: absolute;
         right: 0;
         margin-top: 5vh;
-        margin-right: 10vw;
+        margin-right: 20vw;
         text-align: center;
         font-size: 6vh;
         opacity: 0.0;
-        width: 10vw;
+        width: 20vw;
         background-color: white;
         outline: 1px solid black;
     }
