@@ -140,3 +140,76 @@ html, body {
 .disabled {
     opacity: 0.0;
 }
+
+@media(max-width: 1000px) {
+    #title {
+        margin-top: -5vh;
+        font-size: 4vw;
+    }
+
+    #guesses {
+        margin-top: -5vh;
+        font-size: 4vw;
+    }
+
+    #map {
+        height: 95vh;
+    }
+
+    .leaderboard-icon {
+        margin-left: 5vw;
+    }
+
+    .leaderboard-name {
+        text-align: center;
+    }
+
+    .leaderboard-score {
+        margin-left: 15vw;
+    }
+
+    #firstImg {
+        height: 18vh;
+    }
+
+    #firstName {
+        margin-top: 23vh;
+        margin-left: -20vw;
+    }
+
+    #firstScore {
+        margin-top: 10vh;
+        font-size: 8vw;
+    }
+
+
+    #secondImg {
+        height: 14vh;
+    }
+
+    #secondName {
+        font-size: 4.5vw;
+        margin-top: 19vh;
+        margin-left: -16vw;
+    }
+
+    #secondScore {
+        margin-top: 8.5vh;
+        font-size: 7vw;
+    }
+
+    #thirdImg {
+        height: 10vh;
+    }
+
+    #thirdName {
+        font-size: 4vw;
+        margin-top: 15vh;
+        margin-left: -12vw;
+    }
+
+    #thirdScore {
+        margin-top: 6.5vh;
+        font-size: 6vw;
+    }
+}
