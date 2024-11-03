@@ -3,7 +3,8 @@ let spectatorMap = null;
 async function getLeaderboard() {
     document.getElementById("map").style.opacity = "0.0";
     document.getElementById("leaderboard").style.opacity = "1.0";
-    document.getElementById("guesses").classList.add("disabled");
+    document.getElementById("title").style.opacity = "1.0";
+    document.getElementById("guesses").style.opacity = "0.0";
     const response = await ApiRequest("Spectate", "GetScores", "GET");
     const body = await response.json();
 
@@ -31,34 +32,36 @@ async function getLeaderboard() {
     firstImg.src = `/icons/${first.icon}.jpg`;
     firstName.innerHTML = first.name;
     firstScore.innerHTML = first.score;
+    document.getElementById("first").style.opacity = "1.0";
     if(second == null) {
-        document.getElementById("second").classList.add("disabled");
+        document.getElementById("second").style.opacity = "0.0";
     } else {
-        document.getElementById("second").classList.remove("disabled");
         let secondImg = document.getElementById("secondImg");
         let secondName = document.getElementById("secondName");
         let secondScore = document.getElementById("secondScore");
         secondImg.src = `/icons/${second.icon}.jpg`;
         secondName.innerHTML = second.name;
         secondScore.innerHTML = second.score;
+        document.getElementById("second").style.opacity = "1.0";
     }
     if(third == null) {
-        document.getElementById("third").classList.add("disabled");
+        document.getElementById("third").style.opacity = "0.0";
     } else {
-        document.getElementById("third").classList.remove("disabled");
         let thirdImg = document.getElementById("thirdImg");
         let thirdName = document.getElementById("thirdName");
         let thirdScore = document.getElementById("thirdScore");
         thirdImg.src = `/icons/${third.icon}.jpg`;
         thirdName.innerHTML = third.name;
         thirdScore.innerHTML = third.score;
+        document.getElementById("third").style.opacity = "1.0";
     }
 }
 
 async function displayAndPopulateMap() {
     document.getElementById("map").style.opacity = "1.0";
     document.getElementById("leaderboard").style.opacity = "0.0";
-    document.getElementById("title").classList.add("disabled");
+    document.getElementById("title").style.opacity = "0.0";
+    document.getElementById("guesses").style.opacity = "1.0";
     spectatorMap = L.map("map").setView([39.946952, -76.727429], 18);
 
     L.tileLayer('https://map.ycp.campusgeo.com/{z}/{x}/{y}.png', {

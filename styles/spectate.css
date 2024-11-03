@@ -137,10 +137,6 @@ html, body {
     margin-top: 11vh;
 }
 
-.disabled {
-    opacity: 0.0;
-}
-
 @media(max-width: 1000px) {
     #title {
         margin-top: -5vh;
