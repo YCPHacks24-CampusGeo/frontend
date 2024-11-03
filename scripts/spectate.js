@@ -84,7 +84,10 @@ async function displayAndPopulateMap() {
             L.marker([lat, lng], {icon: marker}).addTo(spectatorMap);
         }
     });
-    L.marker([body.correct.geoLocation.latitude, body.correct.geoLocation.longitude]).addTo(spectatorMap);
+    let correctLat = body.correct.geoLocation.latitude
+    let correctLon = body.correct.geoLocation.longitude
+    L.marker([correctLat, correctLon]).addTo(spectatorMap);
+    spectatorMap.setView([correctLat, correctLon], 17);
 }
 
 window.onload = async function () {
