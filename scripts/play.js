@@ -13,11 +13,13 @@ let playerScore = 0;
 let roundPoints = 0;
 let marker = null;
 let intermission = false;
+let isDragging = false;
 
 async function init() {
     await loadMap('map');
     await loadLocation('panorama');
     await loadToolbar();
+    addMapEventListeners();
     const element = document.getElementById("guess");
     if(element) {
         element.remove();
@@ -43,7 +45,7 @@ async function loadMap(divName) {
     let clickedLatLng;
 
     map.on('click', async function (e) {
-        if(!intermission) {
+        if(!intermission && !isDragging) {
             if (!mapEnlarged) {
                 await swapLocationMap();
             } else {
@@ -200,6 +202,24 @@ async function getPoints() {
     console.log(`Correct: ${correct}`)
     console.log(`Distance: ${distance}`)
     return body.guess.points;
+}
+
+function addMapEventListeners() {
+    const mapDiv = document.getElementById("map");
+    mapDiv.addEventListener('mousedown', () => {
+        isDragging = false;
+    });
+    mapDiv.addEventListener('mousemove', () => {
+        isDragging = true;
+    });
+    mapDiv.addEventListener('mouseup', (event) => {
+        if(!isDragging) {
+            if(!onCooldown) swapLocationMap();
+        }
+    });
+    mapDiv.addEventListener('mouseleave', () => {
+        isDragging = false;
+    });
 }
 
 window.addEventListener('resize', changeMapSize);
